@@ -1,0 +1,3 @@
+Materialidade - Javascript Midterm Assignment
+
+My Midterm assignment proposal is an Art project that talks about materiality and dimensions. The page will have two elements, one on each side of the screen. The one on the left is a 2D representation of the one on the right. As you scroll the page down, you will see different images and textures going through the 2D element, and as you go through them, the image will be applied as a texture on the 3D element (the 3D icon image will be replaced). The intention is that the strong link between the two through the relation of colors and textures start a conversation with the audience about visual representation.
