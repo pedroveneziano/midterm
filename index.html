@@ -6,9 +6,13 @@
 	<link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
+	<div class="top-frame"></div>
+	<div class="bottom-frame"></div>
+	<div class="left-frame"></div>
+	<div class="right-frame"></div>
 	<header>
 		<figure>
-			<img class="logo" src="img/logo.png"/>
+			<img id="logo" src="img/logo.png"/>
 		</figure>
 	</header>
 	<div id='icon-layer'>
@@ -16,6 +20,7 @@
 	<figure>
 		<img id="background" src="" alt="background" width="2560px" height="1440px"/>
 	</figure>
+	<script src="html2canvas.js"></script>
 	<script>
 	(function(){
 
@@ -32,7 +37,7 @@
 
 		//RANDOM ICON//
 
-	  	document.onclick = function(e) {
+	  	var placeNewIcon = function(e) {
 
 	  		_x = e.pageX;
 	 		_y = e.pageY;
@@ -40,10 +45,12 @@
 	 		var randomIconNumber = Math.round(Math.random() * 4);
 	 		newIcon.setAttribute('src', 'img/icon-' + randomIconNumber + '.png');
 	 		newIcon.setAttribute('class', 'icon');
-	 		newIcon.setAttribute('style', 'top: ' + (_y - 100) + 'px; left: ' + (_x - 100) + 'px; z-index: ' + _y);
+	 		newIcon.setAttribute('style', 'top: ' + (_y - 120) + 'px; left: ' + (_x - 150) + 'px; z-index: ' + _y);
 	 		var iconLayer = document.getElementById('icon-layer');
 	 		iconLayer.appendChild(newIcon);
 	  	}
+
+	  	bgImage.addEventListener('click', placeNewIcon);
 
 	})()
 	</script>
