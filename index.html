@@ -14,7 +14,7 @@
 	<div id='icon-layer'>
 	</div>
 	<figure>
-		<img id="background" src="" alt="background"/>
+		<img id="background" src="" alt="background" width="2560px" height="1440px"/>
 	</figure>
 	<script>
 	(function(){
@@ -31,10 +31,11 @@
 		randomizeBg();
 
 		//RANDOM ICON//
-	
-		var HandleClick = function(mp) {
-	  		_x = mp.pageX;
-	 		_y = mp.pageY;
+
+	  	document.onclick = function(e) {
+
+	  		_x = e.pageX;
+	 		_y = e.pageY;
 	 		var newIcon = document.createElement('img');
 	 		var randomIconNumber = Math.round(Math.random() * 4);
 	 		newIcon.setAttribute('src', 'img/icon-' + randomIconNumber + '.png');
@@ -43,8 +44,6 @@
 	 		var iconLayer = document.getElementById('icon-layer');
 	 		iconLayer.appendChild(newIcon);
 	  	}
-
-	  	document.onmousedown = HandleClick;
 
 	})()
 	</script>
