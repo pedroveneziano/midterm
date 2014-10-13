@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset="utf-8" />
+	<title>Inventário</title>
+	<link rel="stylesheet" href="css/style.css" media="all">
+</head>
+<body>
+	<header>
+		<figure>
+			<img class="logo" src="img/logo.png"/>
+		</figure>
+	</header>
+	<div id='icon-layer'>
+	</div>
+	<figure>
+		<img id="background" src="" alt="background"/>
+	</figure>
+	<script>
+	(function(){
+
+		//BACKGROUND IMAGE//
+
+		var bgImage = document.getElementById("background");
+
+		randomizeBg = function() {
+			var randomBgNumber = Math.round(Math.random() * 4);
+			bgImage.setAttribute('src', 'img/bg-' + randomBgNumber + '.jpg');
+		}
+
+		randomizeBg();
+
+		//RANDOM ICON//
+	
+		var HandleClick = function(mp) {
+	  		_x = mp.pageX;
+	 		_y = mp.pageY;
+	 		var newIcon = document.createElement('img');
+	 		var randomIconNumber = Math.round(Math.random() * 4);
+	 		newIcon.setAttribute('src', 'img/icon-' + randomIconNumber + '.png');
+	 		newIcon.setAttribute('class', 'icon');
+	 		newIcon.setAttribute('style', 'top: ' + (_y - 100) + 'px; left: ' + (_x - 100) + 'px; z-index: ' + _y);
+	 		var iconLayer = document.getElementById('icon-layer');
+	 		iconLayer.appendChild(newIcon);
+	  	}
+
+	  	document.onmousedown = HandleClick;
+
+	})()
+	</script>
+</body>
+</html>
