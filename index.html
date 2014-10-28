@@ -6,24 +6,27 @@
 	<link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
+	<div id="start">
+		<div id="overlay-color">
+		</div>
+		<div id="start-box">
+			<p id="intro">Texto inicial que poderá mudar de acordo com o mouse</p>
+		</div>
+	</div>
 	<header>
-		<figure>
-			<img id="logo" src="img/logo.png"/>
-		</figure>
 		<figure>
 			<a id="save"><img src="img/logo.png"/></a>
 		</figure>
 	</header>
 	<div id="screenshot">
-		<div class="top-frame"></div>
-		<div class="bottom-frame"></div>
-		<div class="left-frame"></div>
-		<div class="right-frame"></div>
 		<div id='icon-layer'>
 		</div>
-			<figure>
-				<img id="background" src="" alt="background" width="2560px"/>
-			</figure>
+		<figure>
+			<a href="http://pedroveneziano.com"><img id="logo" src="img/logo.png"/></a>
+		</figure>
+		<figure>
+			<img id="background" src="" width="2560px"/>
+		</figure>
 	</div>
 	<script src="html2canvas.js"></script>
 	<script>
@@ -61,28 +64,49 @@
 	  	//SAVE SCREENSHOT
 
 	  	var savedContent = document.getElementById("screenshot");
-
 	  	var savingButton = document.getElementById("save");
+
 		 
 		var generatePng = function()  {
-
-			var btn = this;
-
-	  		var usableHeight = window.innerHeight;
-	  		var usableWidth = window.innerWidth;
-
+			
 			html2canvas(savedContent, {
-				width: usableWidth,
-		        height: usableHeight,
-		        taintTest: true,
+				width: window.innerWidth,
+		        height: window.innerHeight,
 		        onrendered: function(canvas) {
-		        	btn.href = canvas.toDataURL();
-		        	btn.download = "download.png";
+		        	savingButton.href = canvas.toDataURL();
+		        	savingButton.download = "Inventário.png";
 		        }
 		    }) 
 		}
 		
 		savingButton.addEventListener('click', generatePng);
+
+		//INITIAL SCREEN
+
+		var startScreen = document.getElementById("start");
+
+		startScreen.addEventListener('click', function() {
+			startScreen.classList.add("started");
+		});
+
+		//CHANGE LANGUAGE
+
+		var portugues = "Texto inicial que poderá mudar de acordo com o mouse";
+		var english = "Initial text that changes according to the mouse position";
+
+		var intro = document.getElementById('intro');
+		//intro.innerHTML = english;
+
+		document.body.addEventListener('mousemove', function(e) {
+			
+			_x = e.pageX;
+	 		if(_x < window.innerWidth/2) {
+	 			intro.innerHTML = portugues;
+	 		} else if(_x < window.innerWidth) {
+	 			intro.innerHTML = english;
+	 		}
+		});
+
 
 
 	})()
