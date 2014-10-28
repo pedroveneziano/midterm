@@ -4,15 +4,14 @@ padding:0;
 }
 
 body {
-	max-width: 100%;
-	max-height: 100%;
+	width: 100%;
+	height: 100vh;
 	overflow: hidden;
 }
 
 #screenshot{
 	max-width: 100%;
-	height: 100%;
-	background-color: red;
+	max-height: 100%;
 	overflow: hidden;
 }
 
@@ -26,7 +25,7 @@ body {
 	position: fixed;
 	bottom: 50px;
 	right: 50px;
-	z-index: 1000;
+	z-index: 2000;
 }
 
 #save {
@@ -35,7 +34,25 @@ body {
 	position: fixed;
 	bottom: 50px;
 	left: 50px;
-	z-index: 1000;
+	z-index: 2000;
+	cursor: pointer;
+}
+
+#refresh {
+	display: block;
+	max-width:100%;
+	position: fixed;
+	bottom: 50px;
+	left: 50%;
+	margin-left: -25px;
+	z-index: 2000;
+	cursor: pointer;
+}
+
+#click-again {
+	position: fixed;
+	bottom: 50px;
+	left: 110px;
 }
 
 .icon {
@@ -44,42 +61,30 @@ body {
 	max-width: 100%;
 }
 
-.top-frame{
-	background-color: white;
+#overlay-color {
+	background-color: red;
+	position: absolute;
+	margin: 0;
 	width: 100%;
-	height: 20px;
-	top:0;
-	left:0;
-	position: fixed;
-	z-index: 3000;
-}
-
-.bottom-frame{
-	background-color: white;
-	width: 100%;
-	height: 20px;
-	bottom:0;
-	left:0;
-	position: fixed;
-	z-index: 3000;
-}
-
-.left-frame{
-	background-color: white;
-	width: 20px;
 	height: 100%;
-	top:0;
-	left:0;
-	position: fixed;
-	z-index: 3000;
+	z-index: 2500;
+	opacity: 0.5;
 }
 
-.right-frame{
-	background-color: white;
-	width: 20px;
-	height: 100%;
-	bottom:0;
-	right:0;
+#start-box {
+	padding: 20px;
+	width: 300px;
+	height: 200px;
 	position: fixed;
+    left: 0;
+    right: 0;
+    top: 35%;
 	z-index: 3000;
+	opacity: 1;
+	margin: 0px auto;
+	background-color: white;
+}
+
+.none {
+	display: none;
 }

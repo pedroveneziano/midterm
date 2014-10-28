@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
-	<div id="start">
+	<div id="start" class="none">
 		<div id="overlay-color">
 		</div>
 		<div id="start-box">
@@ -17,6 +17,10 @@
 		<figure>
 			<a id="save"><img src="img/logo.png"/></a>
 		</figure>
+		<figure>
+			<a id="refresh"><img src="img/logo.png"/></a>
+		</figure>
+		<p id="click-again" class="none">CLICK AGAIN</p>
 	</header>
 	<div id="screenshot">
 		<div id='icon-layer'>
@@ -65,6 +69,9 @@
 
 	  	var savedContent = document.getElementById("screenshot");
 	  	var savingButton = document.getElementById("save");
+	  	var clickAgain = document.getElementById("click-again");
+
+	  	var clickCounter = 0;
 
 		 
 		var generatePng = function()  {
@@ -77,6 +84,17 @@
 		        	savingButton.download = "Inventário.png";
 		        }
 		    }) 
+
+			clickCounter = clickCounter + 1;
+
+			if (clickCounter == 1) {
+				clickAgain.classList.remove("none");
+				console.log(1);
+			} else if (clickCounter == 2) {
+				clickAgain.classList.add("none");
+				console.log(2);
+			}
+
 		}
 		
 		savingButton.addEventListener('click', generatePng);
@@ -85,8 +103,16 @@
 
 		var startScreen = document.getElementById("start");
 
+		if (localStorage.refresh === undefined) {
+			startScreen.classList.remove("none");
+		} else if (localStorage.refresh === '') {
+			startScreen.classList.remove("none");
+		} else {
+			localStorage.setItem('refresh', '')
+		}
+
 		startScreen.addEventListener('click', function() {
-			startScreen.classList.add("started");
+			startScreen.classList.add("none");
 		});
 
 		//CHANGE LANGUAGE
@@ -100,13 +126,23 @@
 		document.body.addEventListener('mousemove', function(e) {
 			
 			_x = e.pageX;
-	 		if(_x < window.innerWidth/2) {
+	 		if(_x < window.innerWidth * 0.4) {
 	 			intro.innerHTML = portugues;
 	 		} else if(_x < window.innerWidth) {
 	 			intro.innerHTML = english;
 	 		}
 		});
 
+		//REFRESH BUTTON
+
+		var refresh = document.getElementById('refresh');
+
+		refresh.addEventListener('click', function() {
+		
+			localStorage.setItem('refresh', 'Refresh');
+			location.reload();
+
+		});
 
 
 	})()
