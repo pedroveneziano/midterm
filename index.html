@@ -6,22 +6,28 @@
 	<link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
-	<div class="top-frame"></div>
-	<div class="bottom-frame"></div>
-	<div class="left-frame"></div>
-	<div class="right-frame"></div>
 	<header>
 		<figure>
 			<img id="logo" src="img/logo.png"/>
 		</figure>
+		<figure>
+			<a id="save"><img src="img/logo.png"/></a>
+		</figure>
 	</header>
-	<div id='icon-layer'>
+	<div id="screenshot">
+		<div class="top-frame"></div>
+		<div class="bottom-frame"></div>
+		<div class="left-frame"></div>
+		<div class="right-frame"></div>
+		<div id='icon-layer'>
+		</div>
+			<figure>
+				<img id="background" src="" alt="background" width="2560px"/>
+			</figure>
 	</div>
-	<figure>
-		<img id="background" src="" alt="background" width="2560px" height="1440px"/>
-	</figure>
 	<script src="html2canvas.js"></script>
 	<script>
+
 	(function(){
 
 		//BACKGROUND IMAGE//
@@ -51,6 +57,33 @@
 	  	}
 
 	  	bgImage.addEventListener('click', placeNewIcon);
+
+	  	//SAVE SCREENSHOT
+
+	  	var savedContent = document.getElementById("screenshot");
+
+	  	var savingButton = document.getElementById("save");
+		 
+		var generatePng = function()  {
+
+			var btn = this;
+
+	  		var usableHeight = window.innerHeight;
+	  		var usableWidth = window.innerWidth;
+
+			html2canvas(savedContent, {
+				width: usableWidth,
+		        height: usableHeight,
+		        taintTest: true,
+		        onrendered: function(canvas) {
+		        	btn.href = canvas.toDataURL();
+		        	btn.download = "download.png";
+		        }
+		    }) 
+		}
+		
+		savingButton.addEventListener('click', generatePng);
+
 
 	})()
 	</script>
