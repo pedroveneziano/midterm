@@ -4,32 +4,34 @@
 	<meta charset="utf-8" />
 	<title>Inventário</title>
 	<link rel="stylesheet" href="css/style.css" media="all">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:500italic,700italic,500,700' rel='stylesheet' type='text/css'>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
 	<div id="start" class="none">
 		<div id="overlay-color">
 		</div>
 		<div id="start-box">
-			<p id="intro">Texto inicial que poderá mudar de acordo com o mouse</p>
+			<p id="intro">Inventário é um espaço aberto. É um olhar adentro de um universo que se abriu e não se fecha. É algo que criei para que se crie sozinho. Sem controle do resultado final. Crie, recombine, salve, apague, esqueça.</p>
+			<p id="opening-link">Entrar</p>
 		</div>
 	</div>
 	<header>
 		<figure>
-			<a id="save"><img src="img/logo.png"/></a>
+			<a id="save"><img id="download" src="img/download.png" alt="Download"/></a>
 		</figure>
 		<figure>
-			<a id="refresh"><img src="img/logo.png"/></a>
+			<img id="refresh" src="img/refresh.png" alt="Refresh"/>
 		</figure>
-		<p id="click-again" class="none">CLICK AGAIN</p>
 	</header>
 	<div id="screenshot">
 		<div id='icon-layer'>
 		</div>
 		<figure>
-			<a href="http://pedroveneziano.com"><img id="logo" src="img/logo.png"/></a>
+			<a href="http://pedroveneziano.com"><img id="logo" src="img/logo.png" alt="Pedro Veneziano"/></a>
 		</figure>
 		<figure>
-			<img id="background" src="" width="2560px"/>
+			<img id="background" src="" />
 		</figure>
 	</div>
 	<script src="html2canvas.js"></script>
@@ -55,10 +57,10 @@
 	  		_x = e.pageX;
 	 		_y = e.pageY;
 	 		var newIcon = document.createElement('img');
-	 		var randomIconNumber = Math.round(Math.random() * 4);
+	 		var randomIconNumber = Math.round(Math.random() * 11);
 	 		newIcon.setAttribute('src', 'img/icon-' + randomIconNumber + '.png');
 	 		newIcon.setAttribute('class', 'icon');
-	 		newIcon.setAttribute('style', 'top: ' + (_y - 120) + 'px; left: ' + (_x - 150) + 'px; z-index: ' + _y);
+	 		newIcon.setAttribute('style', 'top: ' + (_y - 170) + 'px; left: ' + (_x - 210) + 'px; z-index: ' + _y);
 	 		var iconLayer = document.getElementById('icon-layer');
 	 		iconLayer.appendChild(newIcon);
 	  	}
@@ -69,9 +71,6 @@
 
 	  	var savedContent = document.getElementById("screenshot");
 	  	var savingButton = document.getElementById("save");
-	  	var clickAgain = document.getElementById("click-again");
-
-	  	var clickCounter = 0;
 
 		 
 		var generatePng = function()  {
@@ -84,22 +83,13 @@
 		        	savingButton.download = "Inventário.png";
 		        }
 		    }) 
-
-			clickCounter = clickCounter + 1;
-
-			if (clickCounter == 1) {
-				clickAgain.classList.remove("none");
-				console.log(1);
-			} else if (clickCounter == 2) {
-				clickAgain.classList.add("none");
-				console.log(2);
-			}
-
 		}
 		
-		savingButton.addEventListener('click', generatePng);
+		savingButton.addEventListener('mousedown', generatePng);
 
 		//INITIAL SCREEN
+
+		var redBox = document.getElementById("overlay-color");
 
 		var startScreen = document.getElementById("start");
 
@@ -111,27 +101,32 @@
 			localStorage.setItem('refresh', '')
 		}
 
-		startScreen.addEventListener('click', function() {
+		var start =  function() {
 			startScreen.classList.add("none");
-		});
+		}
 
 		//CHANGE LANGUAGE
 
-		var portugues = "Texto inicial que poderá mudar de acordo com o mouse";
-		var english = "Initial text that changes according to the mouse position";
+		var portugues = "Inventário é um espaço aberto. É um olhar adentro de um universo que se abriu e não se fecha. É algo que criei para que se crie sozinho. Sem controle do resultado final. Crie, recombine, salve, apague, esqueça.";
+		var english = "Inventário is an open space. It's a peek inside an universe that was opened, yet never closed. It's something I've created to create itself. No control over the final result. Create, recombine, save, delete, forget.";
 
 		var intro = document.getElementById('intro');
-		//intro.innerHTML = english;
+		var openingLink = document.getElementById('opening-link');
 
-		document.body.addEventListener('mousemove', function(e) {
+		redBox.addEventListener('mousemove', function(e) {
 			
 			_x = e.pageX;
-	 		if(_x < window.innerWidth * 0.4) {
+	 		if(_x < window.innerWidth /2) {
 	 			intro.innerHTML = portugues;
+	 			openingLink.innerHTML = "Entrar";
 	 		} else if(_x < window.innerWidth) {
 	 			intro.innerHTML = english;
+	 			openingLink.innerHTML = "Enter";
 	 		}
 		});
+
+		redBox.addEventListener('click', start);
+		openingLink.addEventListener('click', start);
 
 		//REFRESH BUTTON
 
